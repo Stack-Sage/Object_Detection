@@ -17,5 +17,31 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Haettenschweiler, 'Arial Narrow Bold', ;
+  font-weight: 500;
+  font-variant:small-caps;
+  font-size: 1.1em;
+}
+
+
+
+#text-shadow {
+  color: black;
+  font:bolder;
+  text-shadow: 3px 1px 2px whitesmoke ;
+  font-size: 1.8em;
+  font-weight: 800;
+
+
+}
+
+#text-shadow:hover{
+  text-shadow: 4px 2px 3px whitesmoke ;
+  
+
+}
+
+.invert {
+  filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(1.1);
+  font-weight: 600;
 }
