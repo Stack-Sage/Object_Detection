@@ -1,23 +1,33 @@
 'use client'
+import { useEffect, useRef } from "react";
 
-import { useState, useEffect } from "react";
-
-export default function LiveCameraFeed() {
-  const [videoSrc, setVideoSrc] = useState(null);
+export default function VideoStream() {
+  const canvasRef = useRef(null);
+  let socket;
 
   useEffect(() => {
-    // Replace with actual API fetching logic
-    setVideoSrc("http://your-python-backend/video_feed");
+    socket = new WebSocket("ws://localhost:8000/video");
+    socket.binaryType = "blob"; 
+
+    socket.onmessage = async (event) => {
+      const blob = event.data;
+      const bitmap = await createImageBitmap(blob);  
+      const canvas = canvasRef.current;
+      if (canvas) {
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+      }
+    };
+
+    socket.onclose = () => console.log("WebSocket closed");
+    socket.onerror = (err) => console.error("WebSocket error", err);
+
+    return () => {
+      socket.close();
+    };
   }, []);
 
   return (
-    <div className="w-auto h-64  text-sky-300 ring-1 hover:ring-2 transition duration-200  flex items-center justify-center text-xl rounded-md bg-transparent">
-      <h1>Live Camera Feed</h1>
-      {/* {videoSrc ? (
-        <img src={videoSrc} alt="Live Camera Feed" className="w-full h-full object-cover" />
-      ) : (
-        "Live Camera Feed (Waiting for Input...)"
-      )} */}
-    </div>
+    <canvas ref={canvasRef} width={640} height={480} className="rounded-lg" />
   );
 }

@@ -22,9 +22,34 @@ body {
   
   font-variant:small-caps;
   font-size: 1.1em;
+  scroll-behavior:smooth;
+  scrollbar-width: 2px;
+  overflow-x: hidden;
+
 }
 
+::-webkit-scrollbar {
+  width: 6px; /* Adjust scrollbar width */
+}
 
+/* Scrollbar track (background) */
+::-webkit-scrollbar-track {
+  background: transparent; /* Dark navy background */
+  border-radius: 10px;
+}
+
+/* Scrollbar handle (thumb) */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #1d0169ac, #8666c7 ,#120043c8); /* Cyan to Blue gradient */
+  border-radius: 10px;
+  border: 1px solid black;
+  transition: background 1s;
+}
+
+/* Hover effect on scrollbar */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, black, #06b6d4,); /* Reverse gradient */
+}
 
 #text-shadow {
   color: black;
@@ -43,6 +68,204 @@ body {
 }
 
 .invert {
-  filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(1.1);
+  filter: invert(0.92) brightness(1.0) contrast(0.9) saturate(0.8);
   font-weight: 300;
+}
+
+.invert img {
+  filter: invert(1) brightness(1.1)  contrast(0.95) !important; /* Reverts images */
+}
+
+/* .card {
+  position: relative;
+  width: 190px;
+  height: 254px;
+  background-color: #0a0000;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: 2px;
+  gap: 2px;
+  border-radius: 8px;
+  cursor: pointer;
+  filter: brightness(0.8);
+  
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: -5px;
+  margin: auto;
+  width: 200px;
+  height: 264px;
+  border-radius: 10px;
+  background: linear-gradient(-45deg, #bd0af3 0%, #83d3f2e6 100% );
+  z-index: -10;
+  pointer-events: none;
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card::after {
+  content: "";
+  
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(-45deg, #00080f 0%, #9aeded 100% );
+  transform: translate3d(0, 0, 0) scale(0.9);
+  filter: blur(20px);
+}
+
+.heading {
+  font-size: 20px;
+  text-transform: capitalize;
+  font-weight: 700;
+}
+
+.card p:not(.heading) {
+  font-size: 14px;
+}
+
+.card p:last-child {
+  width: full;
+  
+  color: #7ed8ff;
+  font-weight: 600;
+  z-index: 1; 
+  
+  font-size: large;
+  text-align: center;
+  text-shadow: 2px 1px 2px black;
+  border:1px solid ;
+  
+}
+
+.card:hover::after {
+  filter: blur(30px);
+}
+
+.card:hover::before {
+  transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
+} */
+
+
+.card {
+  width: 190px;
+  height: 254px;
+  background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%);
+  border-radius: 20px;
+  transition: all .5s;
+ }
+ 
+ .card2 {
+  width: 190px;
+  height: 254px;
+  background-color: #000000;
+  border-radius:10px;
+  transition: all .2s;
+ }
+ 
+ .card2:hover {
+  transform: scale(0.97);
+  filter: brightness(0.8);
+  border-radius: 20px;
+ }
+ 
+ .card:hover {
+  box-shadow: 0px 0px 30px 1px rgba(31, 255, 136, 0.3);
+ }
+
+ .item-hints {
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+  padding-right: 170px;
+}
+
+.item-hints .hint {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.item-hints .hint-dot {
+  z-index: 3;
+  border: 1px solid #ffe4e4;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.item-hints .hint-content {
+  width: 200px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+  opacity: 0;
+  visibility: hidden;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-5px);
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.item-hints .hint:hover .hint-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-10px);
+}
+
+.item-hints .hint-content::before {
+  width: 0px;
+  bottom: 29px;
+  left: 0;
+  content: "";
+  background-color: #fff;
+  height: 1px;
+  position: absolute;
+  transition: width 0.4s;
+}
+.item-hints .hint:hover .hint-content::before {
+  width: 180px;
+  transition: width 0.4s;
+}
+.item-hints .hint-content::after {
+  -webkit-transform-origin: 0 50%;
+  transform-origin: 0 50%;
+  -webkit-transform: rotate(-225deg);
+  transform: rotate(-225deg);
+  bottom: 29px;
+  left: 0;
+  width: 80px;
+  content: "";
+  background-color: #fff;
+  height: 1px;
+  position: absolute;
+  opacity: 1;
+  -webkit-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+}
+.item-hints .hint:hover .hint-content::after {
+  opacity: 1;
+  visibility: visible;
+}
+.item-hints .hint[data-position="4"] .hint-content {
+  bottom: 85px;
+  left: 50%;
+  margin-left: 56px;
 }
